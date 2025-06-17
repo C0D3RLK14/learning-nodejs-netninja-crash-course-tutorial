@@ -1,7 +1,10 @@
 /* Creating a server */
 const http = require('http');
 const server = http.createServer((req, res) => {
-    console.log('request made');
+    // console.log('request made');
+    // console.log(req); // logs the request object with info of the request made by the user
+    console.log(req.url, req.method); // NOTE: '/' is the url just after 'localhost:3000' and 'GET' you know what it is
+    // 'req.url' returns the url requested by the user and 'req.method' returns the request method. If the user searches for 'localhost:3000/about' the url output becomes '/about'
 }); 
 // NOTE: We don't have store the server in a variable in our case but for some purposes like using web sockets we would have to.
 
