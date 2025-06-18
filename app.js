@@ -27,3 +27,15 @@ app.get('/about', (req,res) => {
     res.sendFile('./views/about.html', {root:__dirname});
 });
 
+/* Redirects */
+app.get('/about-us', (req,res) => {
+    app.redirect('/about'); // express automatically creates the header and status code (304) for us
+});
+
+/* 404 page */
+app.use((req,res) => {
+    // res.sendFile('./views/404.html', {root : __dirname}); // NOTE: That even if the 404 web page is shown the status code is of success, bcz the use method doesn't explicitly say its file missing. Therefore,
+    res.status(404).sendFile('./views/404.html', {root : __dirname});
+});
+// NOTE: The '.use()' does not get any argument for the link user requests. This runs either way the file exists or not if the code block upto here. How this works now at the moment is when a user request url matches with one of the above '.get()' the code block of that '.get()' runs and the rest of the code is ignored. Therefore inorder to get the function of displaying 404 page when page not found the '.use()' should be after all the available urls ('.get()'s)
+
