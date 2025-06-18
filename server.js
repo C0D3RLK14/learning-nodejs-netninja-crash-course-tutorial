@@ -18,8 +18,26 @@ const server = http.createServer((req, res) => {
     // we could send HTML back to the browser as well
     res.setHeader('Content-Type', 'text/html');
 
+    /* Basic routing */
+    // matching the url requested with the file paths
+    let path = './views/';
+    const url = req.url();
+
+    switch(url) {
+        case '/':
+            path += 'index.html';
+            break;
+        case '/about':
+            path += 'about.html';
+            break;
+        default:
+            path += '404.html';
+            break;
+    }
+
     // sending a html file to the browser
-    fs.readFile('./views/index.html', (err, data) => {
+    // passing the 'path' instead of a set path
+    fs.readFile(path, (err, data) => {
         if(err) {
             console.log(err);
             res.end();
