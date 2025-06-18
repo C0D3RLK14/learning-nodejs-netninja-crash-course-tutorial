@@ -18,7 +18,7 @@ const server = http.createServer((req, res) => {
     // 'req.url' returns the url requested by the user and 'req.method' returns the request method. If the user searches for 'localhost:3000/about' the url output becomes '/about'
 
     // using lodash
-    console.log(_.random(10));
+    // console.log(_.random(10));
 
     /* Response object */
     // set response headers
