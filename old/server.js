@@ -1,6 +1,5 @@
 /* Creating a server */
 const http = require('http');
-const fs = require('fs');
 const server = http.createServer((req, res) => {
     // console.log('request made');
     // console.log(req); // logs the request object with info of the request made by the user
@@ -18,16 +17,10 @@ const server = http.createServer((req, res) => {
     // we could send HTML back to the browser as well
     res.setHeader('Content-Type', 'text/html');
 
-    // sending a html file to the browser
-    fs.readFile('./views/index.html', (err, data) => {
-        if(err) {
-            console.log(err);
-            res.end();
-        } else {
-            // res.write(data); // As we are just sending the 'data' through only one write statement we could include it in the end statement as follows.
-            res.end(data);
-        }
-    });
+    res.write('<p> This is a paragraph created by the server response </p>');
+    res.write('<p> This is another paragraph created by the server response </p>'); // NOTE: That if we don't specify the other HTML elments explicity (from html>head>body) they will be generated automatically by the browser.
+    // NOTE: If we don't mention the end statement 'res.end()' the webpage will be loading for infinity, since its waiting for it
+    res.end();
 }); 
 // NOTE: We don't have store the server in a variable in our case but for some purposes like using web sockets we would have to.
 
