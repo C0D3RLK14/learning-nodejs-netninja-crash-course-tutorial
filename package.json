@@ -1,0 +1,23 @@
+{
+  "name": "learning-nodejs-netninja-crash-course-tutorial",
+  "version": "1.0.0",
+  "description": "Learning Node.js from the Node.js crash course tutorial by Net Ninja",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/C0D3RLK14/learning-nodejs-netninja-crash-course-tutorial.git"
+  },
+  "author": "LK",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/C0D3RLK14/learning-nodejs-netninja-crash-course-tutorial/issues"
+  },
+  "homepage": "https://github.com/C0D3RLK14/learning-nodejs-netninja-crash-course-tutorial#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}

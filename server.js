@@ -8,11 +8,17 @@
 /* Creating a server */
 const http = require('http');
 const fs = require('fs');
+// after you install a package you should import it in order to use it
+const _ = require('lodash');
+
 const server = http.createServer((req, res) => {
     // console.log('request made');
     // console.log(req); // logs the request object with info of the request made by the user
-    console.log(req.url, req.method); // NOTE: '/' is the url just after 'localhost:3000' and 'GET' you know what it is
+    // console.log(req.url, req.method); // NOTE: '/' is the url just after 'localhost:3000' and 'GET' you know what it is
     // 'req.url' returns the url requested by the user and 'req.method' returns the request method. If the user searches for 'localhost:3000/about' the url output becomes '/about'
+
+    // using lodash
+    console.log(_.random(10));
 
     /* Response object */
     // set response headers
@@ -42,6 +48,11 @@ const server = http.createServer((req, res) => {
             break;
         /* Redirects */
         case '/about-me':
+            res.setHeader('Location', '/about'); // If the user requests for '/about-me' it redirects to the location '/about' url
+            res.statusCode = 301;
+            res.end(); // NOTE: The 'res.end()' should come after the 'res.statusCode' unless the browser won't identify the redirect
+            break;
+        case '/about-us':
             res.setHeader('Location', '/about'); // If the user requests for '/about-me' it redirects to the location '/about' url
             res.statusCode = 301;
             res.end(); // NOTE: The 'res.end()' should come after the 'res.statusCode' unless the browser won't identify the redirect
