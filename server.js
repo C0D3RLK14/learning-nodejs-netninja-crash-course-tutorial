@@ -40,6 +40,12 @@ const server = http.createServer((req, res) => {
             path += 'about.html';
             res.statusCode = 200;
             break;
+        /* Redirects */
+        case '/about-me':
+            res.setHeader('Location', '/about'); // If the user requests for '/about-me' it redirects to the location '/about' url
+            res.statusCode = 301;
+            res.end(); // NOTE: The 'res.end()' should come after the 'res.statusCode' unless the browser won't identify the redirect
+            break;
         default:
             path += '404.html';
             res.statusCode = 404;
