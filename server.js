@@ -1,3 +1,10 @@
+/* Status Code */
+/*                              **  100 range (informational)      **
+** 200 => OK                    **  200 range (success)            **
+** 301 => Resource moved        **  300 range (code for redirects) **
+** 404 => Not found             **  400 range (user client errors) **
+** 500 => Internal server error **  500 range (server errors)      */
+
 /* Creating a server */
 const http = require('http');
 const fs = require('fs');
@@ -20,18 +27,22 @@ const server = http.createServer((req, res) => {
 
     /* Basic routing */
     // matching the url requested with the file paths
+    // And setting status codes
     let path = './views/';
     const url = req.url;
 
     switch(url) {
         case '/':
             path += 'index.html';
+            res.statusCode = 200;
             break;
         case '/about':
             path += 'about.html';
+            res.statusCode = 200;
             break;
         default:
             path += '404.html';
+            res.statusCode = 404;
             break;
     }
 
