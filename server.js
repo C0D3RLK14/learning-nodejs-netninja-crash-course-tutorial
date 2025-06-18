@@ -5,6 +5,22 @@ const server = http.createServer((req, res) => {
     // console.log(req); // logs the request object with info of the request made by the user
     console.log(req.url, req.method); // NOTE: '/' is the url just after 'localhost:3000' and 'GET' you know what it is
     // 'req.url' returns the url requested by the user and 'req.method' returns the request method. If the user searches for 'localhost:3000/about' the url output becomes '/about'
+
+    /* Response object */
+    // set response headers
+    // // header for the content type being sent to the browser
+    // res.setHeader('Content-Type', 'text/plain'); // This mentions what type of data we are sending back to the browser
+
+    // res.write('hello, ninjas'); // This is what we write back to the browser
+    // res.end(); // This mentions that we have finished writing back to the browser and send what we have written to the browser.
+
+    // we could send HTML back to the browser as well
+    res.setHeader('Content-Type', 'text/html');
+
+    res.write('<p> This is a paragraph created by the server response </p>');
+    res.write('<p> This is another paragraph created by the server response </p>'); // NOTE: That if we don't specify the other HTML elments explicity (from html>head>body) they will be generated automatically by the browser.
+    // NOTE: If we don't mention the end statement 'res.end()' the webpage will be loading for infinity, since its waiting for it
+    res.end();
 }); 
 // NOTE: We don't have store the server in a variable in our case but for some purposes like using web sockets we would have to.
 
