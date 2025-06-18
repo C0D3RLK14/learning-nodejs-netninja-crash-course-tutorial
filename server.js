@@ -21,7 +21,7 @@ const server = http.createServer((req, res) => {
     /* Basic routing */
     // matching the url requested with the file paths
     let path = './views/';
-    const url = req.url();
+    const url = req.url;
 
     switch(url) {
         case '/':
