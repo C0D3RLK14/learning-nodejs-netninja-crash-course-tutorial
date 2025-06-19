@@ -10,6 +10,14 @@ app.set('view engine', 'ejs');
 //listen for requests
 app.listen(3000); 
 
+/* Middleware */
+app.use((req,res) => {
+    console.log(`New request made:\n
+        host : ${req.hostname}\n
+        path : ${req.path}\n
+        method : ${req.method}\n`);
+});
+
 //listening for get requests' url
 app.get('/', (req,res) => {
     // passing a list
