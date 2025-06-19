@@ -27,6 +27,10 @@ app.listen(3000);
 // });
 // NOTE: As there is no '.end()' mentioned above the browser hangs. And if we add it then the response is sent to the browser and any after it is ignored. Therefore we will be using '.next()' to indicate the browser to move on.
 
+/* Static files */
+// NOTE: By default static files like css stylesheets are protected by the server (node.js) from the browser for security reasons. If we want use them we can use the '.static' method in express middlewares to define a public directory where we can keep the static files we need to give access to the browser as below
+app.use(express.static('public'));
+
 // using morgan a 3rd party logger
 app.use(morgan('tiny'));
 
