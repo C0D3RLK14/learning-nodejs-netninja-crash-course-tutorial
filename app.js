@@ -11,11 +11,22 @@ app.set('view engine', 'ejs');
 app.listen(3000); 
 
 /* Middleware */
-app.use((req,res) => {
+/* next() */
+// NOTE: We have pass the 'next' method as the 3rd argument in the '.use()' inorder to use it(callback function)
+app.use((req,res,next) => {
     console.log(`New request made:\n
         host : ${req.hostname}\n
         path : ${req.path}\n
         method : ${req.method}\n`);
+    // res.end();
+    next();
+});
+// NOTE: As there is no '.end()' mentioned above the browser hangs. And if we add it then the response is sent to the browser and any after it is ignored. Therefore we will be using '.next()' to indicate the browser to move on.
+
+// testing another middleware
+app.use((req,res,next) => {
+    console.log('in the next middleware \n');
+    next();
 });
 
 //listening for get requests' url
