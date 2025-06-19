@@ -1,6 +1,10 @@
 //importing express
 const express = require('express');
 
+/* 3rd party middleware */
+// importing morgan
+const morgan = require('morgan');
+
 //setting up an express app
 const app = express(); 
 
@@ -13,21 +17,24 @@ app.listen(3000);
 /* Middleware */
 /* next() */
 // NOTE: We have pass the 'next' method as the 3rd argument in the '.use()' inorder to use it(callback function)
-app.use((req,res,next) => {
-    console.log(`New request made:\n
-        host : ${req.hostname}\n
-        path : ${req.path}\n
-        method : ${req.method}\n`);
-    // res.end();
-    next();
-});
+// app.use((req,res,next) => {
+//     console.log(`New request made:\n
+//         host : ${req.hostname}\n
+//         path : ${req.path}\n
+//         method : ${req.method}\n`);
+//     // res.end();
+//     next();
+// });
 // NOTE: As there is no '.end()' mentioned above the browser hangs. And if we add it then the response is sent to the browser and any after it is ignored. Therefore we will be using '.next()' to indicate the browser to move on.
 
+// using morgan a 3rd party logger
+app.use(morgan('tiny'));
+
 // testing another middleware
-app.use((req,res,next) => {
-    console.log('in the next middleware \n');
-    next();
-});
+// app.use((req,res,next) => {
+//     console.log('in the next middleware \n');
+//     next();
+// });
 
 //listening for get requests' url
 app.get('/', (req,res) => {
