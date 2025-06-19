@@ -1,24 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog ninja from EJS | <%= title %></title>
-</head>
+<%- include('./partials/head'); %>
 <body>
-    <!-- <% const name = 'LK' %> --> <!--This is ejs code -->
-    <nav>
-        <div class="site-title">
-            <!-- <h1><%= name %></h1> --> <!--This is ejs output code '<%= %>'-->
-            <a href="/"><h1>Blog Ninja</h1></a>
-            <p>A Net Ninja Site</p>
-        </div>
-        <ul>
-            <li><a href="/">Blogs</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/blogs/create">New Blog</a></li>
-        </ul>
-    </nav>
+    
+    <!-- injects the nav element from the partial -->
+    <!-- NOTE: That we used '<%- %>' instead of '<%= %>' like before for output code. That's bcz the later translate all the output to string excluding things like escape characters. We don't want that to happern here. -->
+    <%- include('./partials/nav.ejs') // relative path to the partial %>
 
     <div class="blogs content">
         <h2>All Blogs</h2>
@@ -35,5 +22,7 @@
 
         <%  } %>
     </div>
+
+    <%- include('./partials/footer.ejs'); %>
 </body>
 </html>
