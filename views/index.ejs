@@ -3,8 +3,6 @@
 <%- include('./partials/head'); %>
 <body>
     
-    <!-- injects the nav element from the partial -->
-    <!-- NOTE: That we used '<%- %>' instead of '<%= %>' like before for output code. That's bcz the later translate all the output to string excluding things like escape characters. We don't want that to happern here. -->
     <%- include('./partials/nav.ejs') // relative path to the partial %>
 
     <div class="blogs content">
