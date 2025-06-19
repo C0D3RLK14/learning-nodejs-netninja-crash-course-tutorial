@@ -2,9 +2,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog ninja from EJS | <%= title %></title>
-    <!-- NOTE: We don't have give the 'href' as 'href="/public/styles.css"' as the express static middleware set the path to static files in the 'public' directory -->
     <link rel="stylesheet" href="./styles.css">
 
-    <!-- NOTE: For 'blog/create.ejs' file the './styles.css' is not accessible bcz 'styles.css' files is outside the directory of 'create.ejs' therefore we should use '../styles.css' which set the path to directory of the 'create.js' director (if create file is in root/blog we set the path to root then styles.css) -->
+    <!-- for 'create.ejs' -->
     <link rel="stylesheet" href="../styles.css">
 </head>
