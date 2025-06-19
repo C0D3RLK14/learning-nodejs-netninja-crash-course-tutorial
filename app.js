@@ -7,6 +7,10 @@ const morgan = require('morgan');
 //setting up an express app
 const app = express(); 
 
+/* MongoDB */
+// connecting to mongodb
+const mongodbURL = 'mongodb+srv://netninja:H3ll0N3tNinj4@practise.8xzrewz.mongodb.net/?retryWrites=true&w=majority&appName=Practise';
+
 /* Registering EJS view engine */
 app.set('view engine', 'ejs'); 
 
