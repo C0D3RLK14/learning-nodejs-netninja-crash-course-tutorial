@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog ninja from EJS</title>
+    <title>Blog ninja from EJS | <%= title %></title>
 </head>
 <body>
+    <!-- <% const name = 'LK' %> --> <!--This is ejs code -->
     <nav>
         <div class="site-title">
+            <!-- <h1><%= name %></h1> --> <!--This is ejs output code '<%= %>'-->
             <a href="/"><h1>Blog Ninja</h1></a>
             <p>A Net Ninja Site</p>
         </div>
@@ -20,6 +22,18 @@
 
     <div class="blogs content">
         <h2>All Blogs</h2>
+        <%  // checking if there are any blogs
+            if(blogs.length > 0) {
+                blogs.forEach(blog => { %>
+        <h3 class="title"><%= blog.title %></h3>
+        <p class="snippet"><%= blog.snippet %></p>
+
+        <%      });
+            } else { %>
+
+        <p><%= "There are no blogs, yet" %></p>
+
+        <%  } %>
     </div>
 </body>
 </html>
