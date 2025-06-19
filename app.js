@@ -16,7 +16,7 @@ app.listen(3000);
 //listening for get requests' url
 app.get('/', (req,res) => {
     // passing and html file
-    res.sendFile('./views/index.html', {root:__dirname}); /
+    res.sendFile('./views/index.html', {root:__dirname}); 
 });
 
 // Testing app.get again
