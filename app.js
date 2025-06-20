@@ -16,14 +16,37 @@ const app = express();
 // URL Structure
 // const mongodbURL = 'mongodb+srv://{USER}:{PASSWORD}@practise.8xzrewz.mongodb.net/?retryWrites=true&w=majority&appName=Practise';
 const mongodbURL = 'mongodb+srv://netninja:H3ll0N3tNinj4@practise.8xzrewz.mongodb.net/?retryWrites=true&w=majority&appName=Practise';
-// connecting to db
-mongoose.connect(mongodbURL);
+// connecting to db with mongoose
+// mongoose.connect(mongodbURL); // NOTE: This method of connecting to the db doesn't work therefore we should use the method below. Bcz the connection needs time and with other dependencies need to get up running instantly it raises an error
+
+// If we get any deprecation errors we should use the following statement
+// mongoose.connect(mongodbURL, {useNewUrlParser : true, useUnifiedTopology : true}); // NOTE: This method is removed since Node.js Driver v.4.0 so no use
+
+mongoose.connect(mongodbURL)
+    .then((result) => {
+        console.log("connected to Mongo DB old method");
+        //listen for requests
+        app.listen(3000); 
+        console.log("listening for requests on port 3000");
+    })
+    .catch((err) => console.log(err)); // NOTE: Now this solves the timing issue mentioned above and this is the netninja method but this old so we'll learn the new method soon
+
+// // Modern connection method with async/await
+// const connectDB = async () => {
+//     try {
+//       await mongoose.connect(mongodbURL);
+//       console.log('MongoDB connected successfully');
+//     } catch (error) {
+//       console.error('MongoDB connection error:', error);
+//       process.exit(1);
+//     }
+// };
+
+// // Calling the connection function
+// connectDB();
 
 /* Registering EJS view engine */
 app.set('view engine', 'ejs'); 
-
-//listen for requests
-app.listen(3000); 
 
 /* Middleware */
 /* Static files */
