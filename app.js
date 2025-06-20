@@ -4,12 +4,20 @@ const express = require('express');
 // importing morgan
 const morgan = require('morgan');
 
+/* Mongoose */
+// importing mongoose
+const mongoose = require('mongoose');
+
 //setting up an express app
 const app = express(); 
 
 /* MongoDB */
 // connecting to mongodb
+// URL Structure
+// const mongodbURL = 'mongodb+srv://{USER}:{PASSWORD}@practise.8xzrewz.mongodb.net/?retryWrites=true&w=majority&appName=Practise';
 const mongodbURL = 'mongodb+srv://netninja:H3ll0N3tNinj4@practise.8xzrewz.mongodb.net/?retryWrites=true&w=majority&appName=Practise';
+// connecting to db
+mongoose.connect(mongodbURL);
 
 /* Registering EJS view engine */
 app.set('view engine', 'ejs'); 
