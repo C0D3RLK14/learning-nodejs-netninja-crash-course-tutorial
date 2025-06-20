@@ -8,14 +8,23 @@ const morgan = require('morgan');
 // importing mongoose
 const mongoose = require('mongoose');
 
+// importing the blog model
+const Blog = require('./models/blog');
+
+//importing .env
+require('dotenv').config();
+
 //setting up an express app
 const app = express(); 
+
+// //testing .env
+// console.log(process.env);
 
 /* MongoDB */
 // connecting to mongodb
 // URL Structure
 // const mongodbURL = 'mongodb+srv://{USER}:{PASSWORD}@practise.8xzrewz.mongodb.net/?retryWrites=true&w=majority&appName=Practise';
-const mongodbURL = 'mongodb+srv://netninja:H3ll0N3tNinj4@practise.8xzrewz.mongodb.net/?retryWrites=true&w=majority&appName=Practise';
+const mongodbURL = process.env.MONGODB_URL;
 // connecting to db with mongoose
 // mongoose.connect(mongodbURL); // NOTE: This method of connecting to the db doesn't work therefore we should use the method below. Bcz the connection needs time and with other dependencies need to get up running instantly it raises an error
 
@@ -29,7 +38,8 @@ mongoose.connect(mongodbURL)
         app.listen(3000); 
         console.log("listening for requests on port 3000");
     })
-    .catch((err) => console.log(err)); // NOTE: Now this solves the timing issue mentioned above and this is the netninja method but this old so we'll learn the new method soon
+    .catch((err) => console.log(err)); 
+// NOTE: Now this solves the timing issue mentioned above and this is the netninja method but this old so we'll learn the new method soon
 
 // // Modern connection method with async/await
 // const connectDB = async () => {
@@ -38,12 +48,93 @@ mongoose.connect(mongodbURL)
 //       console.log('MongoDB connected successfully');
 //     } catch (error) {
 //       console.error('MongoDB connection error:', error);
-//       process.exit(1);
+//       process.exit(1); 
 //     }
 // };
 
 // // Calling the connection function
 // connectDB();
+
+// testing mongoose and mongodb with test routes
+//saving a blog to the db
+app.get('/add-blog', (req,res) => {
+    // saving a blog in the database
+    const blog = new Blog({
+        title : 'New blog',
+        snippet : 'About my new blog',
+        body : 'All about my new blog'
+    });
+
+    blog.save() /*here we use a method of the instance of a Blog*/
+        .then((result) => { 
+            res.send(result); // To see what the result looks like
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+//test
+app.get('/add-blog2', (req,res) => {
+    const blog = new Blog({
+        title : 'new blog 2',
+        snippet : 'new blog 2',
+        body : 'new blog 2'
+    });
+    blog.save()
+        .then(result => {
+            res.send(result);
+        })
+        .catch(err => console.log(err));
+});
+//test
+app.get('/add-blog3', (req,res) => {
+    const blog = new Blog({
+        title : 'new blog 3',
+        snippet : 'new blog 3',
+        body : 'new blog 3'
+    });
+    blog.save()
+        .then(result => {
+            res.send(result);
+        })
+        .catch(err => console.log(err));
+});
+
+//getting all the blogs
+app.get('/all-blogs', (req,res) => {
+    Blog.find() /*here we use a method of the Blog*/
+        .then((result) => {
+            res.send(result); // This is an array
+        })
+        .catch((err) => {
+            console.log(err);
+        }); // This finds all the blogs in the database
+});
+
+//getting a single blog by id
+app.get('/single-blog', (req,res) => {
+    Blog.findById('6855a42d8654e7f7259712cc')
+        .then(result => {
+            res.send(result);
+        })
+        .catch(err => console.log(err));
+});
+//test
+app.get('/single-blog2', (req,res) => {
+    Blog.findById('6855a991c93e9cd82d5932d1')
+        .then(result => {
+            res.send(result);
+        })
+        .catch(err => console.log(err));
+});
+//test
+app.get('/single-blog3', (req,res) => {
+    Blog.findById('6855a996c93e9cd82d5932d3')
+        .then(result => {
+            res.send(result);
+        })
+        .catch(err => console.log(err));
+});
 
 /* Registering EJS view engine */
 app.set('view engine', 'ejs'); 
