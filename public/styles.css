@@ -70,6 +70,17 @@ h3 {
     margin-left: 20px;
 }
 
+.blogs a {
+    display: block;
+    margin: 40px 0;
+    padding-left: 30px;
+    border-left: 6px solid crimson;
+}
+
+.blogs a:hover h3 {
+    color: crimson;
+}
+
 /* index styles */
 
 /* details styles */

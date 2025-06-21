@@ -72,6 +72,11 @@ app.post('/blogs', (req,res) => {
         .catch(err => console.log(err));
 });
 
+// create blog form
+app.get('/blogs/create', (req,res) => {
+    res.render('create', {title : 'Create a blog'});
+});
+
 // Handling the route parameters
 app.get('/blogs/:id', (req,res) => {
     // getting the route parameter to a variable
@@ -84,6 +89,7 @@ app.get('/blogs/:id', (req,res) => {
         })
         .catch(err => console.log(err));
 });
+// NOTE: The get for route '/blogs/:id' should after all specific '/blogs/..' routes
 
 // create blog form
 app.get('/blogs/create', (req,res) => {
