@@ -91,9 +91,16 @@ app.get('/blogs/:id', (req,res) => {
 });
 // NOTE: The get for route '/blogs/:id' should after all specific '/blogs/..' routes
 
-// create blog form
-app.get('/blogs/create', (req,res) => {
-    res.render('create', {title : 'Create a blog'});
+app.delete('/blogs/:id', (req,res) => {
+    const id = req.params.id;
+
+    Blog.findByIdAndDelete(id)
+        .then(result => {
+            // Now we are going to redirect to the home page. 
+            // But as the request was received in AJAX form we can't resond with 'res.redirect()' to redirect. Therefore we have send a respond in the form of text or JSON back to the browser, And we'll redirect through front end logic
+            res.json({ redirect : '/blogs' });
+        })
+        .catch(err => console.log(err));
 });
 
 /* Redirects */
