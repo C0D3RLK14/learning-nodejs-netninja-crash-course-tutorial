@@ -16,9 +16,6 @@ const Blog = require('./models/blog');
 //setting up an express app
 const app = express(); 
 
-// //testing .env
-// console.log(process.env);
-
 // connecting to mongodb
 const mongodbURL = process.env.MONGODB_URL;
 
@@ -34,11 +31,12 @@ mongoose.connect(mongodbURL)
 /* Registering EJS view engine */
 app.set('view engine', 'ejs'); 
 
-/* Static files */
+/* Middle ware */
 app.use(express.static('public'));
-
 // using morgan a 3rd party logger
 app.use(morgan('tiny'));
+// middleware to convert the post request data to a workable type
+app.use(express.urlencoded()); // NOTE: If we didn't use this the req would we undefined
 
 /*Routes*/
 app.get('/', (req,res) => {
@@ -59,8 +57,35 @@ app.get('/blogs', (req,res) => {
         .catch(err => console.log(err));
 });
 
+// Handling the post request to create a blog in the db
+// NOTE: If the post request isn't handled in the route specified in the action of the web form it would run the 404 method
+app.post('/blogs', (req,res) => {
+    // console.log(req.body); // Checking
+    const blog = Blog(req.body); //As we saw that the 'req.body' returned a similar object in the form of the Blog schema we could directly pass it
 
-// create blog
+    blog.save()
+        .then(result => {
+            //logging a success record
+            console.log(`Updated ${result.title} blog successfully to the database`);
+            res.redirect('/');
+        })
+        .catch(err => console.log(err));
+});
+
+// Handling the route parameters
+app.get('/blogs/:id', (req,res) => {
+    // getting the route parameter to a variable
+    const id = req.params.id; // NOTE: 'id' in both the route '/blogs/:id' and 'req.params.id' must match. If lets say route is '/blogs/:nuts' then this is 'const id = req.params.nuts;
+    // console.log(id); //testing if id works
+    Blog.findById(id)
+        .then(result => {
+            // res.send(req.body);
+            res.render('details', { blog : result, title : 'Blog details' });
+        })
+        .catch(err => console.log(err));
+});
+
+// create blog form
 app.get('/blogs/create', (req,res) => {
     res.render('create', {title : 'Create a blog'});
 });
@@ -74,5 +99,3 @@ app.get('/about-us', (req,res) => {
 app.use((req,res) => {
     res.status(404).render('404', {title : '404'});
 });
-
-
