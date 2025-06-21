@@ -37,7 +37,10 @@ const blog_get = (req,res) => {
         .then(result => {
             res.render('blogs/details', { blog : result, title : 'Blog details' });
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err);
+            res.status(404).render('404', {title : '404'});
+        });
 };
 
 const blog_delete = (req,res) => {
@@ -47,7 +50,10 @@ const blog_delete = (req,res) => {
         .then(result => {
             res.json({ redirect : '/blogs' });
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err);
+            res.status(404).render('404', {title : '404'});
+        });
 };
 
 module.exports = {
