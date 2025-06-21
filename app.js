@@ -10,7 +10,7 @@ const morgan = require('morgan');
 // importing mongoose
 const mongoose = require('mongoose');
 
-// importing the blog model (moved to 'blogRoutes')
+// importing the blog model (moved to 'blogRoutes', then to 'blogController')
 
 // importing the blog routes
 const blogRoutes = require('./routes/blogRoutes')

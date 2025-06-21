@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('./partials/head'); %>
+<%- include('../partials/head'); %>
 
 <body>
 
-    <%- include('./partials/nav.ejs') %>
+    <%- include('../partials/nav.ejs') %>
 
     <div class="details content">
         <h2><%= blog.title %></h2>
@@ -15,7 +15,7 @@
         <!-- 'data-doc' is special attribute of attribute 'data' which allows to create specific attributes in the form 'data-attributName'. We are saving the document(of db) id('_id') in this variable -->
     </div>
 
-    <%- include('./partials/footer.ejs'); %>
+    <%- include('../partials/footer.ejs'); %>
 
     <!-- Handling the front end logic of delete method -->
     <script>
