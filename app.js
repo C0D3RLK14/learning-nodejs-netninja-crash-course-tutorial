@@ -10,8 +10,10 @@ const morgan = require('morgan');
 // importing mongoose
 const mongoose = require('mongoose');
 
-// importing the blog model
-const Blog = require('./models/blog');
+// importing the blog model (moved to 'blogRoutes')
+
+// importing the blog routes
+const blogRoutes = require('./routes/blogRoutes')
 
 //setting up an express app
 const app = express(); 
@@ -48,57 +50,16 @@ app.get('/about', (req,res) => {
     res.render('about', {title : 'About'})
 });
 
-// blog routes
-app.get('/blogs', (req,res) => {
-    Blog.find().sort({ createdAt : -1 })
-        .then(result => {
-            res.render('index', { title : 'All blogs', blogs : result});
-        })
-        .catch(err => console.log(err));
-});
-
-// Handling the post request to create a blog in the db
-app.post('/blogs', (req,res) => {
-    const blog = Blog(req.body); 
-
-    blog.save()
-        .then(result => {
-            //logging a success record
-            console.log(`Updated ${result.title} blog successfully to the database`);
-            res.redirect('/');
-        })
-        .catch(err => console.log(err));
-});
-
-// create blog form
-app.get('/blogs/create', (req,res) => {
-    res.render('create', {title : 'Create a blog'});
-});
-
-// Handling the route parameters
-app.get('/blogs/:id', (req,res) => {
-    const id = req.params.id; 
-    Blog.findById(id)
-        .then(result => {
-            res.render('details', { blog : result, title : 'Blog details' });
-        })
-        .catch(err => console.log(err));
-});
-
-app.delete('/blogs/:id', (req,res) => {
-    const id = req.params.id;
-
-    Blog.findByIdAndDelete(id)
-        .then(result => {
-            res.json({ redirect : '/blogs' });
-        })
-        .catch(err => console.log(err));
-});
-
 /* Redirects */
 app.get('/about-us', (req,res) => {
     app.redirect('/about'); 
 });
+
+//blog routes
+// app.use(blogRoutes);
+//scoping out the routes. This is next level of routing
+app.use('/blogs', blogRoutes);
+
 
 /* 404 page */
 app.use((req,res) => {
