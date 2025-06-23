@@ -14,7 +14,6 @@
         <a class="delete" data-doc="<%= blog._id %>">
             <img src="/trashcan.svg" alt="delete icon">
         </a>
-        <!-- 'data-doc' is special attribute of attribute 'data' which allows to create specific attributes in the form 'data-attributName'. We are saving the document(of db) id('_id') in this variable -->
     </div>
 
     <%- include('../partials/footer.ejs'); %>
@@ -22,20 +21,16 @@
     <!-- Handling the front end logic of delete method -->
     <script>
         // This runs on the browser not the node server
-
         const trashcan = document.querySelector('a.delete');
 
         trashcan.addEventListener('click', (e) => {
             const endpoint = `/blogs/${trashcan.dataset.doc}`; // getting the value of the attribute 'data-doc' above
 
-            // NOTE: When we create a request using raw javascript (not from a form method). The request is passed in AJAX form
             fetch(endpoint, {
                 method : 'DELETE'
-            }) /* Now the JSON response is sent to us from the backend and we'll configure redirect process */
+            })
             .then((response) => response.json()) /* converting the json response to js object(below known as data */
             .then((data) => {
-                // console.log(data) // testing
-
                 // redirecting from the front end
                 window.location.href = data.redirect;
             })

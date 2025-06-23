@@ -1,4 +1,3 @@
-/* All the request handling logic in one file */
 // function index (functions we creating) => blog_index (get all blogs), blog_create_get, blog_create_post, blog_delete
 
 //imports
@@ -7,9 +6,6 @@ const Blog = require('../models/blog');
 const blog_index = (req,res) => {
     Blog.find().sort({ createdAt : -1 })
         .then(result => {
-            // before scoping views
-            // res.render('index', { title : 'All blogs', blogs : result});
-            //after scoping views
             res.render('blogs/index', { title : 'All blogs', blogs : result});
         })
         .catch(err => console.log(err));

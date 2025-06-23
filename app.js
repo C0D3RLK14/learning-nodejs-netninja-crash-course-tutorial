@@ -10,7 +10,7 @@ const app = express();
 //setting view engine of the app
 app.set('view engine', 'ejs'); 
 
-/* Middle ware */
+// Middleware
 app.use(express.static('public'));
 // using morgan a 3rd party logger
 app.use(morgan('tiny'));
@@ -29,7 +29,7 @@ mongoose.connect(mongodbURL)
     })
     .catch((err) => console.log(err)); 
 
-/*Routes*/
+// Routes
 app.get('/', (req,res) => {
     //redirecting to the blogs 
     res.redirect('/blogs');
