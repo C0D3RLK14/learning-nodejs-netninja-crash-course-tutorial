@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../partials/head.ejs') %>
+
+<body>
+    <%- include('../partials/nav.ejs') %>
+
+    <div class="create-blog content">
+        <!-- Creating the POST request from the form -->
+        <form action="/blogs" method="POST"> <!-- Now when we click submit a post request is sent to '/blogs' -->
+            <!-- And to send the data of the input elements with the post req we need to to give them 'name' attributes -->
+            <label for="title">Blog title: </label>
+            <input type="text" id="title" name="title" required>
+            <label for="snippet">Blog snippet: </label>
+            <input type="text" id="snippet" name="snippet" required>
+            <label for="body">Blog snippet: </label>
+            <textarea id="body" name="body"></textarea>
+            <button>Submit</button>
+        </form>
+    </div>
+
+    <%- include('../partials/footer.ejs'); %>
+</body>
+
+</html>
